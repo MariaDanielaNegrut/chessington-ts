@@ -18,7 +18,16 @@ export default class King extends Piece {
                 if (!(i === 0 && j === 0)) {
                     if (currentSquare.row + i >= 0 && currentSquare.row + i < 8 && currentSquare.col + j < 8 &&
                     currentSquare.col + j >= 0) {
-                        availableMoves.push(Square.at(currentSquare.row + i, currentSquare.col + j));
+                        const possibleMove: Square = Square.at(currentSquare.row + i, currentSquare.col + j);
+                        const pieceOnSquare = board.getPiece(possibleMove);
+
+                        if (pieceOnSquare === undefined) {
+                            availableMoves.push(possibleMove);
+                        } else {
+                            if (pieceOnSquare.player !== this.player && !(pieceOnSquare instanceof King)) {
+                                availableMoves.push(possibleMove);
+                            }
+                        }
                     }
                 }
             }
