@@ -14,19 +14,47 @@ export default class Bishop extends Piece {
 
         for (let i = 1; i < 8; i++) {
             if (currentSquare.col - i >= 0 && currentSquare.row - i >= 0) {
-                availableMoves.push(new Square(currentSquare.row - i, currentSquare.col - i));
+                const possibleMove: Square = new Square(currentSquare.row - i, currentSquare.col - i);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (pieceOnSquare === undefined) {
+                    availableMoves.push(possibleMove);
+                } else {
+                    break;
+                }
             }
 
             if (currentSquare.col + i < 8 && currentSquare.row + i < 8) {
-                availableMoves.push(new Square(currentSquare.row + i, currentSquare.col + i));
+                const possibleMove: Square = new Square(currentSquare.row + i, currentSquare.col + i);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (pieceOnSquare === undefined) {
+                    availableMoves.push(possibleMove);
+                } else {
+                    break;
+                }
             }
 
             if (currentSquare.col + i < 8 && currentSquare.row - i >= 0) {
-                availableMoves.push(new Square(currentSquare.row - i, currentSquare.col + i));
+                const possibleMove: Square = new Square(currentSquare.row - i, currentSquare.col + i);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (pieceOnSquare === undefined) {
+                    availableMoves.push(possibleMove);
+                } else {
+                    break;
+                }
             }
 
             if (currentSquare.col - i >= 0 && currentSquare.row + i < 8) {
-                availableMoves.push(new Square(currentSquare.row + i, currentSquare.col - i));
+                const possibleMove: Square = new Square(currentSquare.row + i, currentSquare.col - i);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (pieceOnSquare === undefined) {
+                    availableMoves.push(possibleMove);
+                } else {
+                    break;
+                }
             }
         }
         return availableMoves;
