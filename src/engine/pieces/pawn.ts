@@ -14,31 +14,34 @@ export default class Pawn extends Piece {
         const availableMoves: Square[] = [];
 
         if (this.player === Player.WHITE) {
-            let square: Square = new Square(currentSquare.row + 1, currentSquare.col);
-            if (board.getPiece(square) === undefined) {
-                availableMoves.push(square);
+            if (currentSquare.row + 1 < 8) {
+                let square: Square = new Square(currentSquare.row + 1, currentSquare.col);
+                if (board.getPiece(square) === undefined) {
+                    availableMoves.push(square);
 
-                if (this.didFirstMove === false) {
-                    let square: Square = new Square(currentSquare.row + 2, currentSquare.col);
-                    if (board.getPiece(square) === undefined) {
-                        availableMoves.push(square);
+                    if (this.didFirstMove === false) {
+                        let square: Square = new Square(currentSquare.row + 2, currentSquare.col);
+                        if (board.getPiece(square) === undefined) {
+                            availableMoves.push(square);
+                        }
                     }
                 }
             }
             return availableMoves;
         } else {
-            let square: Square = new Square(currentSquare.row - 1, currentSquare.col);
-            if (board.getPiece(square) === undefined) {
-                availableMoves.push(square);
+            if (currentSquare.row - 1 >= 0) {
+                let square: Square = new Square(currentSquare.row - 1, currentSquare.col);
+                if (board.getPiece(square) === undefined) {
+                    availableMoves.push(square);
 
-                if (this.didFirstMove === false) {
-                    let square: Square = new Square(currentSquare.row - 2, currentSquare.col);
-                    if (board.getPiece(square) === undefined) {
-                        availableMoves.push(square);
+                    if (this.didFirstMove === false) {
+                        let square: Square = new Square(currentSquare.row - 2, currentSquare.col);
+                        if (board.getPiece(square) === undefined) {
+                            availableMoves.push(square);
+                        }
                     }
                 }
             }
-
             return availableMoves;
         }
     }

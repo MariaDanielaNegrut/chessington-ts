@@ -16,7 +16,10 @@ export default class King extends Piece {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 if (!(i === 0 && j === 0)) {
-                    availableMoves.push(Square.at(currentSquare.row + i, currentSquare.col + j));
+                    if (currentSquare.row + i >= 0 && currentSquare.row + i < 8 && currentSquare.col + j < 8 &&
+                    currentSquare.col + j >= 0) {
+                        availableMoves.push(Square.at(currentSquare.row + i, currentSquare.col + j));
+                    }
                 }
             }
         }
