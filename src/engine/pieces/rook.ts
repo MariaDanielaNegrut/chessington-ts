@@ -12,16 +12,47 @@ export default class Rook extends Piece {
         const availableMoves: Square[] = [];
         const currentSquare: Square = board.findPiece(this);
 
-        for (let i = 0; i < 8 ; i++) {
-            const possibleMoveRow = new Square(i, currentSquare.col);
-            const possibleMoveColumn = new Square(currentSquare.row, i);
+        for (let i = currentSquare.row + 1; i < 8; i++) {
+            const possibleMove = new Square(i, currentSquare.col);
+            const pieceOnSquare = board.getPiece(possibleMove);
 
-            if (!possibleMoveRow.equals(currentSquare)) {
-                availableMoves.push(possibleMoveRow);
+            if (pieceOnSquare === undefined) {
+                availableMoves.push(possibleMove);
+            } else {
+                break;
             }
+        }
 
-            if (!possibleMoveColumn.equals(currentSquare)) {
-                availableMoves.push(possibleMoveColumn);
+        for (let i = currentSquare.row - 1; i >= 0; i--) {
+            const possibleMove = new Square(i, currentSquare.col);
+            const pieceOnSquare = board.getPiece(possibleMove);
+
+            if (pieceOnSquare === undefined) {
+                availableMoves.push(possibleMove);
+            } else {
+                break;
+            }
+        }
+
+        for (let i = currentSquare.col - 1; i >= 0; i--) {
+            const possibleMove = new Square(currentSquare.row, i);
+            const pieceOnSquare = board.getPiece(possibleMove);
+
+            if (pieceOnSquare === undefined) {
+                availableMoves.push(possibleMove);
+            } else {
+                break;
+            }
+        }
+
+        for (let i = currentSquare.col + 1; i < 8; i++) {
+            const possibleMove = new Square(currentSquare.row, i);
+            const pieceOnSquare = board.getPiece(possibleMove);
+
+            if (pieceOnSquare === undefined) {
+                availableMoves.push(possibleMove);
+            } else {
+                break;
             }
         }
 
