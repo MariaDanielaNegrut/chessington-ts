@@ -2,6 +2,7 @@ import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
 import Square from "../square";
+import King from "./king";
 
 export default class Pawn extends Piece {
     public didFirstMove: boolean = false;
@@ -27,6 +28,25 @@ export default class Pawn extends Piece {
                     }
                 }
             }
+
+            if (currentSquare.row + 1 < 8 && currentSquare.col + 1 < 8) {
+                let possibleMove: Square = new Square(currentSquare.row + 1, currentSquare.col + 1);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (!!pieceOnSquare && pieceOnSquare.player !== this.player && !(pieceOnSquare instanceof King)) {
+                    availableMoves.push(possibleMove);
+                }
+            }
+
+            if (currentSquare.row + 1 < 8 && currentSquare.col - 1 >= 0) {
+                let possibleMove: Square = new Square(currentSquare.row + 1, currentSquare.col - 1);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (!!pieceOnSquare && pieceOnSquare.player !== this.player && !(pieceOnSquare instanceof King)) {
+                    availableMoves.push(possibleMove);
+                }
+            }
+
             return availableMoves;
         } else {
             if (currentSquare.row - 1 >= 0) {
@@ -42,6 +62,25 @@ export default class Pawn extends Piece {
                     }
                 }
             }
+
+            if (currentSquare.row - 1 >= 0 && currentSquare.col + 1 < 8) {
+                let possibleMove: Square = new Square(currentSquare.row - 1, currentSquare.col + 1);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (!!pieceOnSquare && pieceOnSquare.player !== this.player && !(pieceOnSquare instanceof King)) {
+                    availableMoves.push(possibleMove);
+                }
+            }
+
+            if (currentSquare.row - 1 >= 0 && currentSquare.col - 1 >= 0) {
+                let possibleMove: Square = new Square(currentSquare.row - 1, currentSquare.col - 1);
+                const pieceOnSquare = board.getPiece(possibleMove);
+
+                if (!!pieceOnSquare && pieceOnSquare.player !== this.player && !(pieceOnSquare instanceof King)) {
+                    availableMoves.push(possibleMove);
+                }
+            }
+
             return availableMoves;
         }
     }
